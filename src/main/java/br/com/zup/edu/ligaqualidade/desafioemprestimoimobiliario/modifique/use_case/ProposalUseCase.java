@@ -11,11 +11,6 @@ public class ProposalUseCase {
         return proponentsQuantity >= 2;
     }
 
-    //TODO create Proponent Class
-    public boolean applyMainProponentRule() {
-        return true;
-    }
-
     public boolean applyWarrantyQuantityRule(int warrantyQuantity) {
         return warrantyQuantity >= 1;
     }
@@ -40,7 +35,7 @@ public class ProposalUseCase {
 
         final String[] badStates = { "PR", "SC", "RS" };
 
-        return Arrays.stream(badStates).anyMatch(state::contains);
+        return Arrays.stream(badStates).noneMatch(state::contains);
     }
 
 }
