@@ -19,19 +19,19 @@ enum InvoiceRuleEnum {
     YOUNG {
         @Override
         boolean applyInvoiceRuleByAge(double invoice, double loanValue) {
-            return (invoice * 4 >= loanValue);
+            return (invoice / 4 >= loanValue);
         }
     },
     ADULT {
         @Override
         boolean applyInvoiceRuleByAge(double invoice, double loanValue) {
-            return (invoice * 3 >= loanValue);
+            return (invoice / 3 >= loanValue);
         }
     },
     AGED {
         @Override
         boolean applyInvoiceRuleByAge(double invoice, double loanValue) {
-            return (invoice * 2 >= loanValue);
+            return (invoice / 2 >= loanValue);
         }
     };
 

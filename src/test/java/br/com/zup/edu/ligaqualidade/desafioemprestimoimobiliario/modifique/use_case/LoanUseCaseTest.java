@@ -1,7 +1,6 @@
 package br.com.zup.edu.ligaqualidade.desafioemprestimoimobiliario.modifique.use_case;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -11,8 +10,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @ExtendWith(MockitoExtension.class)
 class LoanUseCaseTest {
 
@@ -21,14 +18,14 @@ class LoanUseCaseTest {
 
     @ParameterizedTest
     @MethodSource("generateTrueValues")
-    void applyLoanValueRule_shouldReturnTrue(double value) {
+    void applyLoanValueRule_whenValueIsInRage_shouldReturnTrue(double value) {
 
         Assertions.assertTrue(useCase.applyLoanValueRule(value));
     }
 
     @ParameterizedTest
     @MethodSource("generateFalseValues")
-    void applyLoanValueRule_shouldReturnFalse(double value) {
+    void applyLoanValueRule_whenValueIsNotInRage_shouldReturnFalse(double value) {
 
         Assertions.assertFalse(useCase.applyLoanValueRule(value));
     }
