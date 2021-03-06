@@ -41,6 +41,18 @@ class ProposalUseCaseTest {
     }
 
     @ParameterizedTest
+    @MethodSource("applyWarrantyValueRule_genTrueValues")
+    void applyWarrantyValueRule_shouldReturnTrue(double loanValues, double... warrantyValues) {
+        Assertions.assertTrue(useCase.applyWarrantyValueRule(loanValues, warrantyValues));
+    }
+
+    @ParameterizedTest
+    @MethodSource("applyWarrantyValueRule_genFalseValues")
+    void applyWarrantyValueRule_shouldReturnFalse(double loanValues, double... warrantyValues) {
+        Assertions.assertFalse(useCase.applyWarrantyValueRule(loanValues, warrantyValues));
+    }
+
+    @ParameterizedTest
     @MethodSource("applyWarrantyStatesRule_genTrueValues")
     void applyWarrantyStatesRule_shouldReturnTrue(String state) {
         Assertions.assertTrue(useCase.applyWarrantyStatesRule(state));
@@ -89,6 +101,26 @@ class ProposalUseCaseTest {
                 .add(Arguments.of(-1))
                 .add(Arguments.of(-30))
                 .add(Arguments.of(-1000))
+                .build();
+    }
+
+    private static Stream<Arguments> applyWarrantyValueRule_genTrueValues() {
+        final double[] minWarranty = { 5000.00, 5000.00 };
+        final double[] maxWarranty = { 10000.00, 10000.00 };
+
+        return Stream.<Arguments>builder()
+                .add(Arguments.of(20000.00, minWarranty))
+                .add(Arguments.of(39000.00, maxWarranty))
+                .build();
+    }
+
+    private static Stream<Arguments> applyWarrantyValueRule_genFalseValues() {
+        final double[] minWarranty = { 1000.00, 1000.00 };
+        final double[] maxWarranty = { 10000.00, 10000.00 };
+
+        return Stream.<Arguments>builder()
+                .add(Arguments.of(20000.00, minWarranty))
+                .add(Arguments.of(100000.00, maxWarranty))
                 .build();
     }
 
